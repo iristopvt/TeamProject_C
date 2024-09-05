@@ -8,7 +8,6 @@
 #include "MyStatComponent.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(DeathDelegate)
-DECLARE_MULTICAST_DELEGATE_OneParam(HpChanged,float)
 
 DECLARE_MULTICAST_DELEGATE_OneParam(PlHP, float);
 DECLARE_MULTICAST_DELEGATE_OneParam(PIEXP, float);
@@ -66,7 +65,6 @@ public:
 
 	bool IsDead() {return _curHp <= 0; }
 
-	HpChanged _hpChangedDelegate;
 	DeathDelegate _deathDelegate;
 
 	float EXpRatio() { return _curExp / (float)_nextExp; }

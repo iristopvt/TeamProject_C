@@ -36,7 +36,6 @@ protected:
 	virtual void Mouse(const FInputActionValue& value);
 	virtual void Interaction(const FInputActionValue& value);
 	
-
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual void Attack(const FInputActionValue& value);

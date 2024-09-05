@@ -30,7 +30,6 @@ public:
 	FMyStatData* GetStatDataByLevel(int level);
 	FMyStatData* GetBossStatDataByLevel(int level);
 
-	//TODO : YSR Particle
 	AMyEffectManager* GetEffectManager() { return _effectManager; }
 	AMySoundManager* GetSoundManager() { return _soundManager; }
 	UFUNCTION()
@@ -53,11 +52,9 @@ private:
 	UPROPERTY()
 	class UDataTable* _bossStatTable;
 
-	//TODO : YSR Particle
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	AMyEffectManager* _effectManager;
 
-	//TODO : YSR Sound
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	AMySoundManager* _soundManager;
 

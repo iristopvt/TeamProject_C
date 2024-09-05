@@ -57,16 +57,10 @@ void AMyMonster::PostInitializeComponents()
 
 	if (hpBar)
 	{
-		_statCom->_hpChangedDelegate.AddUObject(hpBar, &UMyHpBar::SetHpBarvalue);
+		_statCom->_PlHPDelegate.AddUObject(hpBar, &UMyHpBar::SetHpBarvalue);
 	}
 
 }
-
-void AMyMonster::Attack_AI()
-{
-
-}
-
 
 void AMyMonster::DropReword()
 {
@@ -99,6 +93,7 @@ void AMyMonster::Disable()
 	if (controller)
 		GetController()->UnPossess();
 }
+
 
 float AMyMonster::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {	

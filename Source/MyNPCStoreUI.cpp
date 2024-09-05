@@ -108,8 +108,9 @@ void UMyNPCStoreUI::Buyclick()
                 if (NewItem)
                 {
                     NewItem->_itemId = SelectedItemData.ItemId;
-
+                    NewItem->_meshComponent->SetSkeletalMesh(_Items[SelectedItemIndex].ItemMesh);
                     Player->_invenCom->AddItem(NewItem);
+                    NewItem->Disable();
                     UE_LOG(LogTemp, Error, TEXT("Item add"));
                 }
 

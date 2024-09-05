@@ -65,9 +65,7 @@ float AMyBossMonster::TakeDamage(float Damage, struct FDamageEvent const& Damage
 
 
 void AMyBossMonster::Attack_AI()
-{
-	Super::Attack_AI();
-	
+{	
 	if (_statCom->IsDead())
 		return;
 

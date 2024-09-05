@@ -26,15 +26,21 @@ public:
 	void SetLoop(bool loop){_bLoop = loop;}
 
 	FieldAttack _fieldAttackDelegate;
+
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DECAL, meta = (AllowPrivateAccess = "true"))
 	float _areaRadius;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DECAL, meta = (AllowPrivateAccess = "true"))
 	float _delayTime;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DECAL, meta = (AllowPrivateAccess = "true"))
 	float _runTime;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DECAL, meta = (AllowPrivateAccess = "true"))
 	bool _bIsPlay = false;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = DECAL, meta = (AllowPrivateAccess = "true"))
 	bool _bLoop = false;
 };
+

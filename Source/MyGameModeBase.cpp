@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "MyGameModeBase.h"
 #include "MyBaseMonster.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -12,12 +11,10 @@
 #include "MyStatComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-
-
 AMyGameModeBase::AMyGameModeBase()
 {
-    static ConstructorHelpers::FClassFinder<AMyBaseMonster>
-	myMonster(TEXT("/Script/Engine.Blueprint'/Game/Blueprint/Monster/MyBaseMonster_BP.MyBaseMonster_BP_C'"));
+	static ConstructorHelpers::FClassFinder<AMyBaseMonster>
+		myMonster(TEXT("/Script/Engine.Blueprint'/Game/Blueprint/Monster/MyBaseMonster_BP.MyBaseMonster_BP_C'"));
 	if (myMonster.Succeeded())
 	{
 		_monsterClass = myMonster.Class;
@@ -26,23 +23,34 @@ AMyGameModeBase::AMyGameModeBase()
 
 void AMyGameModeBase::BeginPlay()
 {
-    Super::BeginPlay();
+	Super::BeginPlay();
 
-	FVector location = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() + FVector(100,0.0f,0.0f);
+
+	FVector location = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() + FVector(100, 0.0f, 100.0f);
 	FRotator rotator = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorRotation();
-	
-    for (int i = 0; i < _monsterNum; i++)
+
+	for (int i = 0; i < _monsterNum; i++)
 	{
 		location.X += 700.0 * i;
 		location.Y += 700.0f;
+		location.Z = 100.0f;
 
-		AMyBaseMonster* SpawnedActor = GetWorld()->SpawnActor<AMyBaseMonster>(_monsterClass, FVector::ZeroVector, FRotator::ZeroRotator);
-		SpawnedActor->SetActorLocation(location);
-		SpawnedActor->SpawnDefaultController();
-		_basemonsters.Add(SpawnedActor);
-    }
 
-	for(auto monster : _basemonsters)
+
+		AMyBaseMonster *SpawnedActor = GetWorld()->SpawnActor<AMyBaseMonster>(_monsterClass, FVector(0.0f,0.0f,100.0f), FRotator::ZeroRotator);
+		if (SpawnedActor)
+		{
+			SpawnedActor->SetActorLocation(location);
+			SpawnedActor->SpawnDefaultController();
+			_basemonsters.Add(SpawnedActor);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed to spawn monster actor."));
+		}
+	}
+
+	for (auto monster : _basemonsters)
 	{
 		_animInstance = Cast<UMyAnim_Monster_Instance>(monster->GetMesh()->GetAnimInstance());
 		if (_animInstance->IsValidLowLevelFast())
@@ -50,37 +58,34 @@ void AMyGameModeBase::BeginPlay()
 			_animInstance->_deathDelegate.AddUObject(this, &AMyGameModeBase::MonsterClear);
 		}
 	}
-
 }
 
 void AMyGameModeBase::PostInitializeComponents()
 {
-	Super::PostInitializeComponents();	
+	Super::PostInitializeComponents();
 }
 
 void AMyGameModeBase::MonsterClear()
 {
 	_monsterNum--;
 
-    if (_monsterNum <= 0)
-    {
-       AMyPlayer* PlayerCharacter = Cast<AMyPlayer>(UGameplayStatics::GetPlayerCharacter(this, 0));
-    	if (PlayerCharacter)
-    	{
-        	UMyStatComponent* StatComponent = PlayerCharacter->FindComponentByClass<UMyStatComponent>();
-        	if (StatComponent)
-        	{
-            	int32 PlayerLevel = StatComponent->GetLevel();
-        
-            	UMyGameInstance* GameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(this));
-            	if (GameInstance)
-            	{
-                	GameInstance->SavePlayerStatus(PlayerLevel);
-            	}
-            	UGameplayStatics::OpenLevel(this, FName("BossMap"));
-        	}
-    	}
-    }
+	if (_monsterNum <= 0)
+	{
+		AMyPlayer *PlayerCharacter = Cast<AMyPlayer>(UGameplayStatics::GetPlayerCharacter(this, 0));
+		if (PlayerCharacter)
+		{
+			UMyStatComponent *StatComponent = PlayerCharacter->FindComponentByClass<UMyStatComponent>();
+			if (StatComponent)
+			{
+				int32 PlayerLevel = StatComponent->GetLevel();
 
-	
+				UMyGameInstance *GameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(this));
+				if (GameInstance)
+				{
+					GameInstance->SavePlayerStatus(PlayerLevel);
+				}
+				UGameplayStatics::OpenLevel(this, FName("BossStage"));
+			}
+		}
+	}
 }

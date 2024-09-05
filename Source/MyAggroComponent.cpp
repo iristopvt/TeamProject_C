@@ -60,8 +60,6 @@ AMyPlayer* UMyAggroComponent::GetTopAggroTarget() const
             TopAggroActor = AggroEntry.Key;
         }
     }
-
-
     return TopAggroActor;
 }
 

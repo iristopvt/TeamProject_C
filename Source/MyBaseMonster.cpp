@@ -75,7 +75,6 @@ FString AMyBaseMonster::GetDeadSoundName() const
 
 void AMyBaseMonster::Attack_AI()
 {
-	Super::Attack_AI();
 	if (_statCom->IsDead())
 	{
 		FVector missLocation = GetActorLocation();

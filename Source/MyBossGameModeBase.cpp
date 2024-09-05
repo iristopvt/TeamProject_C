@@ -47,7 +47,7 @@ void AMyBossGameModeBase::BeginPlay()
         FActorSpawnParameters SpawnParams;
         SpawnParams.Name = TEXT("Boss");
 
-        AMyBossMonster *Boss = GetWorld()->SpawnActor<AMyBossMonster>(_bossMonster, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+        AMyBossMonster *Boss = GetWorld()->SpawnActor<AMyBossMonster>(_bossMonster, FVector(0.0f,0.0f,200.0f), FRotator::ZeroRotator, SpawnParams);
 
         if (Boss)
         {

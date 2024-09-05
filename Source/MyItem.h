@@ -52,15 +52,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 _itemId = -1;
 
+	UPROPERTY(VisibleAnywhere)
+	class USkeletalMeshComponent* _meshComponent;
+
+
 protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
 	virtual void OnMyCharacterOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromWeep, const FHitResult& SweepResult);
-
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent* _meshComponent;
-
 	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* _trigger;
 

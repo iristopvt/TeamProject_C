@@ -83,7 +83,6 @@ void UMyStatComponent::SetHp(int32 hp)
 	}
 
 	float ratio = HpRatio();
-	_hpChangedDelegate.Broadcast(ratio);
 	_PlHPDelegate.Broadcast(ratio);
 
 }
