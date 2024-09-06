@@ -13,6 +13,11 @@ UCLASS()
 class SGA_TEAM_YPK_API UMyAggroUserWidget : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	virtual void NativeConstruct() override;
+
+
 public:
     UFUNCTION(BlueprintCallable, Category="Aggro")
     void UpdateAggroDisplay(class AMyPlayer* Player, float DamageAmount);

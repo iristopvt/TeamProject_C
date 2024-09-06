@@ -9,6 +9,7 @@
 #include "MyStatComponent.h"
 #include "Components/WidgetComponent.h"
 #include "MyHpBar.h"
+#include "MyInvenUI.h"
 
 AMyMonster::AMyMonster()
 {
@@ -41,6 +42,8 @@ AMyMonster::AMyMonster()
 	{
 		_Widget->SetWidgetClass(hpBar.Class);
 	}
+
+
 }
 
 void AMyMonster::BeginPlay()
@@ -107,6 +110,14 @@ float AMyMonster::TakeDamage(float Damage, FDamageEvent const& DamageEvent, ACon
 		if (controller)
 			GetController()->UnPossess();
 		player->_statCom->AddExp(GetExp());
+
+		
+		player->_money += _Dropmoney;
+
+		if (player->_invenWidget)
+		{
+			player->_invenWidget->MoneyUpdate(player->_money);
+		}
 	}
 
 	return 0.0f;

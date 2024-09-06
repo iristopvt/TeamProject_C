@@ -18,6 +18,8 @@
 #include "GameFramework/PlayerController.h"
 #include "MyInvenUI.h"
 
+#include "Components/TextBlock.h"
+
 
 void UMyNPCStoreUI::NativeConstruct()
 {
@@ -46,6 +48,7 @@ void UMyNPCStoreUI::NativeConstruct()
 
     }
 
+    //ItemImage = LoadObject<UTexture2D>(nullptr, TEXT("/Script/Engine.Texture2D'/Game/Graphic/icon/Tex_DefaultTexture.Tex_DefaultTexture'"));
 
     if (NPCSlotBtn_1)
     {
@@ -118,23 +121,49 @@ void UMyNPCStoreUI::Buyclick()
             butncheck = false;
         }
     }
+
+   
 }
+
+void UMyNPCStoreUI::SelectItem(int32 Item)
+{
+    if (_Items.IsValidIndex(Item))
+    {
+        const FItemData& SelectedItemData = _Items[Item];
+
+        if (ItemImage && SelectedItemData.ItemTexture)
+        {
+            ItemImage->SetBrushFromTexture(SelectedItemData.ItemTexture);
+        }
+
+        if (Name)
+        {
+            Name->SetText(FText::FromString(SelectedItemData.ItemName));
+        }
+    }
+}
+
+
 void UMyNPCStoreUI::checkbtn1()
 {
     butncheck = true;
     SelectedItemIndex = 0;
+    SelectItem(SelectedItemIndex);
+
     UE_LOG(LogTemp, Error, TEXT("1 item check"));
 }
 void UMyNPCStoreUI::checkbtn2()
 {
     butncheck = true;
     SelectedItemIndex = 1;
+    SelectItem(SelectedItemIndex);
     UE_LOG(LogTemp, Error, TEXT("2 item check"));
 }
 void UMyNPCStoreUI::checkbtn3()
 {
     butncheck = true;
     SelectedItemIndex = 2;
+    SelectItem(SelectedItemIndex);
     UE_LOG(LogTemp, Error, TEXT("3 item check"));
 }
 

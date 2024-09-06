@@ -37,8 +37,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 	TArray<struct FItemData> _Items;
-
-
+	
 	class AMyNPCItem* npItem;
 
 	void SetNPCItems(const TArray<FItemData>& Items);
@@ -62,6 +61,12 @@ public:
 	int32 SelectedItemIndex = -1;
 
 
+	UPROPERTY(meta = (BindWidget))
+	UImage* ItemImage;
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* Name;
+
+	void SelectItem(int32 Item);
 private:
 
 

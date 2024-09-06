@@ -6,6 +6,18 @@
 #include "Components/VerticalBox.h"
 #include "Components/TextBlock.h"
 
+
+void UMyAggroUserWidget::NativeConstruct()
+{
+    Super::NativeConstruct();
+
+    _playerIndex.Empty(); 
+    _damageInfo.Empty(); 
+
+}
+
+
+
 void UMyAggroUserWidget::UpdateAggroDisplay(class AMyPlayer *Player, float DamageAmount)
 {
     if (AggroTarget)
@@ -30,7 +42,6 @@ void UMyAggroUserWidget::UpdateAllAggroDisplay(class AMyPlayer* Player, float Da
 
     if (nameBars.Num() != damageBars.Num())
     {
-        UE_LOG(LogTemp, Warning, TEXT("PlayerNameInfo와 DamageInfo의 텍스트 블록 수가 일치하지 않습니다."));
         return;
     }
 
@@ -81,4 +92,5 @@ void UMyAggroUserWidget::UpdateAllAggroDisplay(class AMyPlayer* Player, float Da
         }
     }
 }
+
 

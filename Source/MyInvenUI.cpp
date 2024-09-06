@@ -11,6 +11,9 @@
 #include "GameFramework/PlayerController.h"
 #include "MyNPCItem.h"
 
+// te
+#include "Components/TextBlock.h"
+
 void UMyInvenUI::NativeConstruct()
 {
 
@@ -41,6 +44,13 @@ void UMyInvenUI::NativeConstruct()
 		DropBtn->OnClicked.AddDynamic(this, &UMyInvenUI::Dropclick);
 	}
 
+
+	AMyPlayer* player = Cast<AMyPlayer>(GetOwningPlayerPawn());
+
+	if (player != nullptr && Money != nullptr)
+	{
+		MoneyUpdate(player->_money);
+	}
 }
 
 void UMyInvenUI::SetItem(int32 itemId, int32 index)
@@ -65,6 +75,7 @@ void UMyInvenUI::SetItem(int32 itemId, int32 index)
 				if (ItemTexture)
 				{
 					_slotBtnImages[index]->SetBrushFromTexture(ItemTexture);
+			
 				}
 				else
 				{
@@ -85,6 +96,14 @@ void UMyInvenUI::Dropclick()
 	if (player && player->_invenCom)
 	{
 		player->_invenCom->DropItem();
+	}
+}
+
+void UMyInvenUI::MoneyUpdate(int32 newMoney)
+{
+	if (Money != nullptr)
+	{
+		Money->SetText(FText::AsNumber(newMoney));
 	}
 }
 

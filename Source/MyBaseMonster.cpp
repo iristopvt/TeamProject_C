@@ -23,6 +23,7 @@ AMyBaseMonster::AMyBaseMonster()
 
 	
 	_exp = 10; // 기존 30
+	_Dropmoney = 3;
 }
 
 void AMyBaseMonster::BeginPlay()

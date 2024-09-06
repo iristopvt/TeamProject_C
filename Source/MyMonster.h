@@ -37,7 +37,6 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere)
 	int32 _exp;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AI, meta = (AllowPrivateAccess = "true"))
 	class AAIController* _aiController;
 
@@ -47,4 +46,6 @@ protected:
 	UPROPERTY()
 	UClass* _rewardClass;
 
+	UPROPERTY(VisibleAnywhere)
+	int32 _Dropmoney;
 };

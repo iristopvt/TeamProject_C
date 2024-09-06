@@ -24,6 +24,10 @@ public:
 
 	virtual void Attack_AI();
 
+	int32 _money;
+
+
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;

@@ -69,6 +69,8 @@ AMyPlayer::AMyPlayer()
 	{
 		_Widget->SetWidgetClass(PlWidget.Class);
 	}
+
+	_money = 10;
 }
 
 void AMyPlayer::Tick(float DeltaTime)
@@ -83,6 +85,12 @@ void AMyPlayer::Tick(float DeltaTime)
 			StoreNPC->NPCStoreUI(false);
 		}
 	}
+
+	//if (_invenWidget && _invenWidget->IsVisible())
+	//{
+	//	_invenWidget->MoneyUpdate(_money);  // UI 클래스에 업데이트 함수가 있어야 합니다.
+	//}
+
 }
 
 void AMyPlayer::BeginPlay()

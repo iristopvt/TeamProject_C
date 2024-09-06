@@ -37,4 +37,10 @@ public:
 
 	UFUNCTION()
 	void Dropclick();
+
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* Money;
+
+	void MoneyUpdate(int32 newMoney);
+
 };
